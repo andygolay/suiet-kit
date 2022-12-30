@@ -105,3 +105,17 @@ a {
     color-scheme: dark;
   }
 }
+
+.app-button{    
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--wkit-border-radius);
+  font-weight: 600;
+  font-size: var(--wkit-font-size-medium);
+  line-height: var(--wkit-line-height-medium);
+  padding: 14px;
+  border: 0;
+  cursor: pointer;
+}

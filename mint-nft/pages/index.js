@@ -79,27 +79,7 @@ export default function Home() {
           </div>
         </div>
 
-        <div className={styles.center}>
-          <Image
-            className={styles.logo}
-            src="/next.svg"
-            alt="Next.js Logo"
-            width={180}
-            height={37}
-            priority
-          />
-          <div className={styles.thirteen}>
-            <Image
-              src="/thirteen.svg"
-              alt="13"
-              width={40}
-              height={31}
-              priority
-            />
-          </div>
-        </div>
-
-        <button onClick={handleSignAndExecuteTx}>Mint Your NFT!</button>
+        <button className="app-button" onClick={handleSignAndExecuteTx}>Mint NFT!</button>
 
         <div className={styles.grid}>
           <a
