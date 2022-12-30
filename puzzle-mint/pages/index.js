@@ -12,7 +12,7 @@ let objectID = "";
 export default function Home() {
 
   const wallet = useWallet();
-  
+
   async function handleSignAndExecuteTx() {
 
     console.log("Transacting")
@@ -49,16 +49,23 @@ export default function Home() {
     } catch (e) {
         console.error('nft mint failed', e);
     } 
+    const mintAudio = new Audio('../spacesound.wav');
+    mintAudio.play();
     var url = "https://explorer.sui.io/objects/" + encodeURIComponent(objectID);
+    document.getElementById('mint-btn').style.cssText = `
+      background-color: lightgreen;
+      border-radius: 0;
+    `;  
+    document.getElementById('mint-btn').innerHTML= '<p>Success! View NFT <a href="#" id="explorer-link">Here</a></p>'
     document.getElementById("explorer-link").href = url;
-    document.getElementById('success-msg').style.display = "block";
-    document.getElementById('mint-btn').style.display = "none";
+    document.getElementById('mint-btn').onclick="";
   }
 
   useEffect (() => { 
+    document.getElementById('mint-btn').onclick=handleSignAndExecuteTx;
     const spaceAudio = new Audio('../spaceaudio.wav');
     if (!wallet.connected) {
-      document.getElementById('revealed').style.opacity=0.05;
+      document.getElementById('revealed').style.opacity=0.025;
       document.getElementsByClassName('Home_main__nLjiQ')[0].style.backgroundColor=null; 
       document.getElementById('validated-canvas-overlay').style.width="355px";
       document.getElementById('validated-canvas-overlay').style.height="355px";
@@ -81,28 +88,16 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main className={styles.main}>
+
         <div className={styles.description}>
-          <p>  
-            Mint with <a href="https://martianwallet.xyz/">Martian Wallet</a> <br></br>for Martian OG Consideration
-          </p>
-          <div>
-            <ConnectButton>Connect to Mint NFT</ConnectButton>
-            
-          </div>
+          <p>Enjoy your animated NFT mint! <br></br>Use <a href="https://martianwallet.xyz/">Martian Wallet</a> to be<br></br>considered for Martian OG.</p>
+          
+          <ConnectButton>Connect to Mint NFT</ConnectButton>   
+          
         </div>
+
         <div id="revealed">
           
-        <div className={styles.center}>  
-            <div className='wkit-connected-container'>
-              <button 
-                className="wkit-connected-button" 
-                id="success-msg"
-              >
-                <p>Success! View NFT <a href="#" id="explorer-link">Here</a></p>
-              </button>
-            </div>
-          </div>
-
           <div className={styles.center}>
             <div id="canvas-container">
               <div id="sound-canvas">
@@ -116,16 +111,12 @@ export default function Home() {
               </div>
             </div>
           </div>
-        
-
-  
-
+    
           <div className={styles.center}>
             <div className='wkit-connected-container'>
               <div className='wkit-connected-container'>
                 <button 
                   className="wkit-connected-button" 
-                  onClick={handleSignAndExecuteTx}
                   id="mint-btn"
                 >
                   Mint NFT ✠
